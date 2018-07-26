@@ -10,4 +10,4 @@ Servicio de Respuesta
 - ejecutar el programa
 `$ node core.js`
 
-> " corriendo el programa con la version node 3.10.10"?
+> "version node 3.10.10"
