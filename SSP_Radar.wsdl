@@ -1,0 +1,62 @@
+<definitions name="RadarService"
+   xmlns="http://schemas.xmlsoap.org/wsdl/"
+   targetNamespace="http://172.18.44.187:3128/complementaservice/"
+   xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema/"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance/"
+   xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+   xmlns:tns ="http://172.18.44.187:3128/complementaservice/">
+
+   <message name="RadarComplementacionRequest">
+      <part name="pregunta" type="SOAP-ENC:Array"/>      
+      <part name="clave" type="inf:tipo_pregunta"/>
+      <part name="dias" type="xsd:int"/>
+      <part name="salarioMinimo" type="xsd:int"/>
+      <part name="importe" type="xsd:decimal"/>
+      <part name="derechos" type="xsd:decimal"/>
+      <part name="direccion" type="xsd:string"/>
+      <part name="usuario" type="xsd:string"/>
+      <part name="password" type="xsd:string"/>
+   </message>
+
+   <message name="RadarComplementacionResponse">
+      <part name="error" type="xsd:decimal"/>
+      <part name="estatus" type="xsd:string"/>
+      <part name="total_registros" type="xsd:decimal"/>
+      <part name="total_registros_procesados" type="xsd:decimal"/>
+      <part name="total_registros_correctos" type="xsd:decimal"/>
+      <part name="total_registros_erroneos" type="xsd:decimal"/>
+      <part name="inicio_procesamiento" type="xsd:string"/>
+      <part name="fin_procesamiento" type="xsd:string"/>
+   </message>
+
+   <portType name="Radares_PortType">
+      <operation name="procesar_archivo" namespace="http://172.18.44.187:3128/complementaservice/">
+         <input message="RadarComplementacionRequest"/>
+         <output message="RadarComplementacionResponse"/>
+      </operation>
+   </portType>
+
+   <binding name="RadarComplementa_Binding" type="Radares_PortType">
+      <soap:binding style="rpc"
+         transport="http://schemas.xmlsoap.org/soap/http"/>
+      <operation name="procesar_archivo">
+         <soap:operation soapAction="procesar_archivo"/>
+         <input>
+            <soap:body />
+         </input>
+      
+         <output>
+            <soap:body use="encoded" />
+         </output>
+      </operation>
+   </binding>
+
+   <service name="Radares_Service">
+      <documentation>WSDL File for Complementa_Service</documentation>
+      <port binding="RadarComplementa_Binding" name="Radares_Port">
+         <soap:address
+            location="http://172.18.44.187:3128/complementaservice/" />
+      </port>
+   </service>
+</definitions>
